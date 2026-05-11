@@ -2,6 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -106,6 +107,25 @@ class HabitPrinter{
             System.out.println("- none");
         }
     }
+    public static void printHabitsByPriority(ArrayList<Habit> habits, Habit.Priority priority, String title){
+        System.out.println(title);
+
+        boolean found = false;
+
+
+        for (Habit h : habits) {
+
+
+            if (h.getPriority() == priority){
+                System.out.println("- " + h.getName());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("-  none");
+        }
+    }
 }
 
 public class Main {
@@ -155,14 +175,18 @@ public class Main {
         printer.printHabitsByStatus(habits, true, "Done habits: ");
         printer.printHabitsByStatus(habits, false, "Not done habits: " + (amount - done));
 
+        printer.printHabitsByPriority(habits, Habit.Priority.valueOf("High"), "High priority:");
+        printer.printHabitsByPriority(habits, Habit.Priority.valueOf("Medium"), "Medium priority:");
+        printer.printHabitsByPriority(habits, Habit.Priority.Low, "Low priority habits:");
+
         System.out.println("Search habit by name: ");
         String searchName = sc.nextLine();
 
         Habit foundHabit = HabitService.findHabit(habits, searchName);
         if (foundHabit != null){
             System.out.println("Found: " + foundHabit.getName()
-            + "completed: " + foundHabit.isCompleted()
-            + "priority: " + foundHabit.getPriority());
+            + " completed: " + foundHabit.isCompleted()
+            + " priority: " + foundHabit.getPriority());
         } else {
             System.out.println("Habit not found.");
         }
