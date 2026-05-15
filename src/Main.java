@@ -2,7 +2,6 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -84,6 +83,36 @@ class HabitService {
         }
     }
 
+    public static void menu(ArrayList<Habit> habits, Scanner sc){
+        while(true) {
+            System.out.println("1. Show all habits\n" +
+                    "2. Show done habits\n" +
+                    "3. Show not done habits\n" +
+                    "4. Mark habit completed\n" +
+                    "5. Search habit\n" +
+                    "6. Filter by priority\n" +
+                    "7. Show stats\n" +
+                    "0. Exit");
+
+            System.out.println("Choose option: ");
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            if (choice == 1) {
+                for (Habit h : habits) {
+                    System.out.println("- " + h.getName()
+                            + " | completed: " + h.isCompleted()
+                            + " | priority: " + h.getPriority());
+                }
+            } else if (choice == 0) {
+                System.out.println("Execute.");
+                break;
+            } else {
+                System.out.println("Not implemented yet.");
+            }
+        }
+    }
+
 
     public void sortByPriority(ArrayList<Habit> habits) {
         habits.sort((h1,h2) -> h1.getPriority().ordinal() - h2.getPriority().ordinal());
@@ -105,7 +134,18 @@ class HabitPrinter{
 
         if (!found) {
             System.out.println("- none");
+
         }
+    }
+
+    public static void markCompleted(ArrayList<Habit> habits, int index){
+        if (index >=0 && index < habits.size()){
+            habits.get(index).setCompleted(true);
+
+        } else {
+            System.out.println("Wrong habits number! ");
+        }
+
     }
     public static void printHabitsByPriority(ArrayList<Habit> habits, Habit.Priority priority, String title){
         System.out.println(title);
@@ -155,9 +195,11 @@ public class Main {
 
 
         }
+
+        HabitService.menu(habits, sc);
         //saveToFile(habits,bool);
 
-        int done = service.calculateCompletion(habits);
+        int done;
 //        System.out.println("Done habits: ");
 //        for (Habit h : habits) {
 //            if (h.isCompleted()){
@@ -172,12 +214,21 @@ public class Main {
 //            }
 //        }
         service.sortByPriority(habits);
+
+        System.out.println("Enter the number of habit to set it completed: ");
+        int UserChoice = sc.nextInt();
+        sc.nextLine();
+        HabitPrinter.markCompleted(habits, UserChoice - 1);
+        done = service.calculateCompletion(habits);
+
         printer.printHabitsByStatus(habits, true, "Done habits: ");
         printer.printHabitsByStatus(habits, false, "Not done habits: " + (amount - done));
 
         printer.printHabitsByPriority(habits, Habit.Priority.valueOf("High"), "High priority:");
         printer.printHabitsByPriority(habits, Habit.Priority.valueOf("Medium"), "Medium priority:");
         printer.printHabitsByPriority(habits, Habit.Priority.Low, "Low priority habits:");
+
+
 
         System.out.println("Search habit by name: ");
         String searchName = sc.nextLine();
