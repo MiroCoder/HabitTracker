@@ -107,6 +107,46 @@ class HabitService {
             } else if (choice == 0) {
                 System.out.println("Execute.");
                 break;
+            } else if (choice == 2 ) {
+                System.out.println("Done habits: ");
+                for (Habit h : habits) {
+                    if (h.isCompleted()) {
+                        System.out.println(h.getName());
+                    }
+                }
+            } else if (choice == 3) {
+                System.out.println("Not done habits: ");
+                for (Habit h : habits) {
+                    if (!h.isCompleted()) {
+                        System.out.println(h.getName());
+                    }
+                }
+            } else if(choice == 4) {
+                System.out.println("Choose habit to mark completed: ");
+
+                ArrayList<Integer> indexes = new ArrayList<>();
+                int position = 1;
+
+                for (int i = 0; i < habits.size(); i++) {
+                    Habit h = habits.get(i);
+
+                    if (!h.isCompleted()) {
+                        System.out.println(position + ". " + h.getName());
+                        indexes.add(i);
+                        position++;
+                    }
+                }
+
+                int select = sc.nextInt();
+                sc.nextLine();
+
+                if (select >=1 & select <= indexes.size()) {
+                    int realIndex = indexes.get(select - 1);
+                    HabitPrinter.markCompleted(habits, realIndex);
+                    System.out.println(habits.get(realIndex).getName() + " completed");
+                } else {
+                    System.out.println("Wrong choice.");
+            }
             } else {
                 System.out.println("Not implemented yet.");
             }
