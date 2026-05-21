@@ -1,2 +1,2 @@
-Code:true
-Deutsch:false
+Read | false | Medium
+Code | true | High

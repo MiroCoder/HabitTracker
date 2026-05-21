@@ -13,8 +13,6 @@ public class Main {
 
 
         int amount = readAmount(sc);
-//        boolean[] bool = new boolean[ amount];
-//        String[] habits = new String[ amount];
         ArrayList<Habit> habits = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
@@ -25,68 +23,16 @@ public class Main {
 
             Habit habit = new Habit(name, completed, priority);
             habits.add(habit);
-//            habits[i] = sc.nextLine();
-//            bool[i] = readComplete(sc,habits[i]);
-//            String name = sc.nextLine();
-//            boolean bool = readComplete(sc,name);
 
 
         }
 
-        HabitService.menu(habits, sc);
+        HabitMenu.menu(habits, sc);
         //saveToFile(habits,bool);
 
         int done;
-//        System.out.println("Done habits: ");
-//        for (Habit h : habits) {
-//            if (h.isCompleted()){
-//                System.out.println(h.getName());
-//            }
-//        }
-//
-//        System.out.println("Not done habits: ");
-//        for (Habit h : habits) {
-//            if (!h.isCompleted()){
-//                System.out.println(h.getName());
-//            }
-//        }
         service.sortByPriority(habits);
 
-        System.out.println("Enter the number of habit to set it completed: ");
-        int UserChoice = sc.nextInt();
-        sc.nextLine();
-        HabitPrinter.markCompleted(habits, UserChoice - 1);
-        done = service.calculateCompletion(habits);
-
-        printer.printHabitsByStatus(habits, true, "Done habits: ");
-        printer.printHabitsByStatus(habits, false, "Not done habits: " + (amount - done));
-
-        printer.printHabitsByPriority(habits, Habit.Priority.valueOf("High"), "High priority:");
-        printer.printHabitsByPriority(habits, Habit.Priority.valueOf("Medium"), "Medium priority:");
-        printer.printHabitsByPriority(habits, Habit.Priority.Low, "Low priority habits:");
-
-
-        System.out.println("Search habit by name: ");
-        String searchName = sc.nextLine();
-
-        Habit foundHabit = HabitService.findHabit(habits, searchName);
-        if (foundHabit != null) {
-            System.out.println("Found: " + foundHabit.getName()
-                    + " completed: " + foundHabit.isCompleted()
-                    + " priority: " + foundHabit.getPriority());
-        } else {
-            System.out.println("Habit not found.");
-        }
-        System.out.println("You've completed " + done + " of " + amount + " habits (" + ((done * 100.0) / amount) + "%)");
-
-
-        System.out.println("You had a " + service.dayType(amount, done) + ".");
-
-        if (done == amount) {
-            System.out.println("You've completed all habits! Congratulations!");
-        } else {
-            System.out.println("You haven't completed " + (amount - done) + " habits yet");
-        }
         sc.close();
 
     }
