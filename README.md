@@ -33,10 +33,10 @@ The app lets users add habits, set priorities, mark habits as completed, filter 
 
 ```text
 src/
-  Main.java
-  Habit.java
-  HabitService.java
-  HabitPrinter.java
+  main.java.Main.java
+  main.java.Habit.java
+  main.java.HabitService.java
+  main.java.HabitPrinter.java
 ```
 
 ## Example Output
@@ -67,7 +67,7 @@ The goal is to practice clean Java logic, OOP structure, collections, validation
 ## Roadmap
 
 - [x] Java Core basics
-- [x] OOP model with `Habit`
+- [x] OOP model with `main.java.Habit`
 - [x] Priority enum
 - [x] ArrayList storage
 - [x] Menu navigation

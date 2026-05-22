@@ -1,2 +1,3 @@
-Read | false | Medium
 Code | true | High
+Stretch | false | High
+German | false | Medium

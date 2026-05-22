@@ -74,7 +74,7 @@ public class HabitMenu {
                             + " completed: " + foundHabit.isCompleted()
                             + " priority: " + foundHabit.getPriority());
                 } else {
-                    System.out.println("Habit not found.");
+                    System.out.println("main.java.Habit not found.");
                 }
             } else if (choice == 6) {
                 Habit.Priority priority = Main.readPriority(sc);
@@ -83,8 +83,8 @@ public class HabitMenu {
                 System.out.println("Total habits: " + habits.size());
                 System.out.println("Completed: " + HabitService.calculateCompletion(habits));
                 System.out.println("Not completed: " + (habits.size() - HabitService.calculateCompletion(habits)));
-//                HabitPrinter.printHabitsByStatus(habits, true, "Completed habits: ");
-//                HabitPrinter.printHabitsByStatus(habits,false, "Not completed yet: ");
+//                main.java.HabitPrinter.printHabitsByStatus(habits, true, "Completed habits: ");
+//                main.java.HabitPrinter.printHabitsByStatus(habits,false, "Not completed yet: ");
                 System.out.println("Progress: " + HabitService.dayPercent(habits.size(), HabitService.calculateCompletion(habits)) + " %");
                 System.out.println(HabitService.dayType(habits.size(), HabitService.calculateCompletion(habits)));
 

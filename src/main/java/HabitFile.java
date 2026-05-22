@@ -1,3 +1,4 @@
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,7 +46,7 @@ public class HabitFile {
                     }
 
                 }
-                //habits.add(new Habit(parts[0], Boolean.parseBoolean(parts[1]), Habit.Priority.valueOf(parts[2])));
+                //habits.add(new main.java.Habit(parts[0], Boolean.parseBoolean(parts[1]), main.java.Habit.Priority.valueOf(parts[2])));
             });
 
             System.out.println("Habits loaded.");

@@ -1,3 +1,4 @@
+
 class Habit {
     private String name;
     private boolean completed;
