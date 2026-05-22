@@ -31,11 +31,18 @@ public class HabitFile {
             Files.readAllLines(path).forEach(line -> {
                 String[] parts = line.split("\\s*\\|\\s*");
 
+                if (line.isEmpty() || parts.length < 3) {
+                    return;
+                }
                 if (parts.length == 3) {
                     String name = parts[0];
                     boolean completed = Boolean.parseBoolean(parts[1]);
-                    Habit.Priority priority = Habit.Priority.valueOf(parts[2]);
-                    habits.add(new Habit(name, completed, priority));
+                    try {
+                        Habit.Priority priority = Habit.Priority.valueOf(parts[2]);
+                        habits.add(new Habit(name, completed, priority));
+                    } catch(IllegalArgumentException e){
+                        System.out.println("Skipped wrong priority: " + line);
+                    }
 
                 }
                 //habits.add(new Habit(parts[0], Boolean.parseBoolean(parts[1]), Habit.Priority.valueOf(parts[2])));
