@@ -1,0 +1,55 @@
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class HabitServiceTest {
+
+    @Test
+    void calculateCompletionCountsCompletedHabits() {
+        ArrayList<Habit> habits = new ArrayList<>();
+        habits.add(new Habit("Code", true, Habit.Priority.High));
+        habits.add(new Habit("German", false, Habit.Priority.Medium));
+        habits.add(new Habit("Stretch", true, Habit.Priority.Low));
+
+        int result = HabitService.calculateCompletion(habits);
+
+        assertEquals(2, result);
+    }
+
+    @Test
+    void findHabitFindsByNameIgnoringCase() {
+        ArrayList<Habit> habits = new ArrayList<>();
+        habits.add(new Habit("Code", false, Habit.Priority.High));
+
+        Habit result = HabitService.findHabit(habits, "code");
+
+        assertNotNull(result);
+        assertEquals("Code", result.getName());
+    }
+
+    @Test
+    void findHabitReturnsNullWhenNotFound() {
+        ArrayList<Habit> habits = new ArrayList<>();
+        habits.add(new Habit("Code", false, Habit.Priority.High));
+
+        Habit result = HabitService.findHabit(habits, "Sleep");
+
+        assertNull(result);
+    }
+
+    @Test
+    void dayTypeReturnsPerfectDayForHundredPercent() {
+        String result = HabitService.dayType(3, 3);
+
+        assertEquals("Perfect day", result);
+    }
+
+    @Test
+    void dayPercentReturnsCorrectPercent() {
+        double result = HabitService.dayPercent(4, 2);
+
+        assertEquals(50.0, result);
+    }
+}
