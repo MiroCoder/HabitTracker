@@ -52,4 +52,31 @@ class HabitServiceTest {
 
         assertEquals(50.0, result);
     }
+    @Test
+    void dayTypeReturnsStrongDayForSeventyPercent() {
+        String result = HabitService.dayType(10, 7);
+
+        assertEquals("Strong day", result);
+    }
+
+    @Test
+    void dayTypeReturnsSystemDayForFiftyPercent() {
+        String result = HabitService.dayType(10, 5);
+
+        assertEquals("System day", result);
+    }
+
+    @Test
+    void dayTypeReturnsRecoveryDayForOnePercent() {
+        String result = HabitService.dayType(100, 1);
+
+        assertEquals("Recovery day", result);
+    }
+
+    @Test
+    void dayTypeReturnsZeroDayForZeroPercent() {
+        String result = HabitService.dayType(10, 0);
+
+        assertEquals("Zero day", result);
+    }
 }
